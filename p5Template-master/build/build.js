@@ -1,7 +1,7 @@
 var gui = new dat.GUI();
 var params = {
     Seed: 17,
-    Nombre_de_triangles: 15,
+    Nombre_de_triangles: 20,
     Download_Image: function () { return save(); },
 };
 gui.add(params, "Seed", 0, 100, 1);
@@ -87,149 +87,51 @@ function draw() {
     line(P23X, P23Y, P24X, P24Y);
     line(P24X, P24Y, P25X, P25Y);
     strokeWeight(1);
-    for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-        var XetY = returnXetY(P1X, P1Y, P2X, P2Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(-100, 200), random(380, 800), random(-100, 200), random(380, 900));
+    draw_some_triangles(P1X, P1Y, P2X, P2Y);
+    draw_some_triangles(P2X, P2Y, P3X, P3Y);
+    draw_some_triangles(P3X, P3Y, P4X, P4Y);
+    draw_some_triangles(P4X, P4Y, P5X, P5Y);
+    draw_some_triangles(P5X, P5Y, P6X, P6Y);
+    draw_some_triangles(P6X, P6Y, P7X, P7Y);
+    draw_some_triangles(P7X, P7Y, P8X, P8Y);
+    draw_some_triangles(P8X, P8Y, P9X, P9Y);
+    draw_some_triangles(P9X, P9Y, P10X, P10Y);
+    draw_some_triangles(P10X, P10Y, P11X, P11Y);
+    draw_some_triangles(P11X, P11Y, P12X, P12Y);
+    draw_some_triangles(P12X, P12Y, P13X, P13Y);
+    draw_some_triangles(P13X, P13Y, P14X, P14Y);
+    draw_some_triangles(P14X, P14Y, P15X, P15Y);
+    draw_some_triangles(P15X, P15Y, P16X, P16Y);
+    draw_some_triangles(P16X, P16Y, P17X, P17Y);
+    draw_some_triangles(P17X, P17Y, P18X, P18Y);
+    draw_some_triangles(P18X, P18Y, P19X, P19Y);
+    draw_some_triangles(P19X, P19Y, P20X, P20Y);
+    draw_some_triangles(P20X, P20Y, P21X, P21Y);
+    draw_some_triangles(P21X, P21Y, P22X, P22Y);
+    draw_some_triangles(P22X, P22Y, P23X, P23Y);
+    draw_some_triangles(P23X, P23Y, P24X, P24Y);
+    draw_some_triangles(P24X, P24Y, P25X, P25Y);
+}
+function draw_some_triangles(x_start, y_start, x_end, y_end) {
+    var longueurIntervalle = calculLongueurIntervalle(x_start, y_start, x_end, y_end);
+    var minX = longueurIntervalle[0];
+    var maxX = longueurIntervalle[1];
+    var longueur = longueurIntervalle[2];
+    if (longueur > 80) {
+        for (var i = 0; i <= params.Nombre_de_triangles; i++) {
+            var XetY = returnXetY(x_start, y_start, x_end, y_end);
+            var newX = XetY[0];
+            var newY = XetY[1];
+            triangle(newX, newY, random(minX, maxX), random(y_start + 120, y_start + 500), random(minX, maxX), random(y_start + 120, y_start + 500));
+        }
     }
-    for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-        var XetY = returnXetY(P2X, P2Y, P3X, P3Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(-50, 250), random(400, 900), random(-50, 250), random(400, 750));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-        var XetY = returnXetY(P3X, P3Y, P4X, P4Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(-50, 250), random(400, 750), random(-50, 250), random(400, 650));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-        var XetY = returnXetY(P4X, P4Y, P5X, P5Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(50, 300), random(400, 700), random(50, 300), random(400, 900));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles - 5; i++) {
-        var XetY = returnXetY(P5X, P5Y, P6X, P6Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(0, 300), random(300, 700), random(0, 300), random(300, 700));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles - 5; i++) {
-        var XetY = returnXetY(P6X, P6Y, P7X, P7Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(-20, 320), random(400, 700), random(-20, 320), random(400, 700));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles - 5; i++) {
-        var XetY = returnXetY(P7X, P7Y, P8X, P8Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(-40, 340), random(400, 800), random(-40, 340), random(400, 800));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles - 5; i++) {
-        var XetY = returnXetY(P8X, P8Y, P9X, P9Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(-50, 350), random(400, 700), random(-50, 350), random(400, 700));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-        var XetY = returnXetY(P9X, P9Y, P10X, P10Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(0, 400), random(400, 800), random(0, 400), random(400, 800));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-        var XetY = returnXetY(P10X, P10Y, P11X, P11Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(0, 400), random(450, 800), random(0, 400), random(450, 800));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-        var XetY = returnXetY(P11X, P11Y, P12X, P12Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(0, 400), random(450, 800), random(0, 400), random(450, 800));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-        var XetY = returnXetY(P12X, P12Y, P13X, P13Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(130, 530), random(450, 700), random(130, 530), random(450, 800));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-        var XetY = returnXetY(P13X, P13Y, P14X, P14Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(160, 560), random(450, 650), random(160, 560), random(450, 500));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-        var XetY = returnXetY(P14X, P14Y, P15X, P15Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(200, 600), random(450, 500), random(200, 600), random(400, 450));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-        var XetY = returnXetY(P15X, P15Y, P16X, P16Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(260, 660), random(450, 400), random(260, 660), random(450, 500));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles + 10; i++) {
-        var XetY = returnXetY(P16X, P16Y, P17X, P17Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(300, 600), random(450, 500), random(300, 600), random(450, 300));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-        var XetY = returnXetY(P17X, P17Y, P18X, P18Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(350, 550), random(450, 600), random(350, 550), random(450, 600));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-        var XetY = returnXetY(P18X, P18Y, P19X, P19Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(360, 560), random(450, 600), random(360, 560), random(450, 600));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-        var XetY = returnXetY(P19X, P19Y, P20X, P20Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(400, 600), random(450, 700), random(500, 700), random(450, 700));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles + 10; i++) {
-        var XetY = returnXetY(P20X, P20Y, P21X, P21Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(430, 730), random(450, 800), random(530, 830), random(450, 800));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-        var XetY = returnXetY(P21X, P21Y, P22X, P22Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(600, 900), random(450, 750), random(600, 900), random(450, 800));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-        var XetY = returnXetY(P22X, P22Y, P23X, P23Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(630, 930), random(650, 800), random(630, 930), random(650, 700));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-        var XetY = returnXetY(P23X, P23Y, P24X, P24Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(660, 1000), random(450, 750), random(660, 1000), random(450, 850));
-    }
-    for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-        var XetY = returnXetY(P24X, P24Y, P25X, P25Y);
-        var newX = XetY[0];
-        var newY = XetY[1];
-        triangle(newX, newY, random(670, 1000), random(450, 700), random(670, 1000), random(450, 750));
+    else {
+        for (var i = 0; i <= params.Nombre_de_triangles / 4; i++) {
+            var XetY = returnXetY(x_start, y_start, x_end, y_end);
+            var newX = XetY[0];
+            var newY = XetY[1];
+            triangle(newX, newY, random(minX, maxX), random(y_start + 120, y_start + 500), random(minX, maxX), random(y_start + 120, y_start + 500));
+        }
     }
 }
 function returnXetY(P1X, P1Y, P2X, P2Y) {
@@ -238,6 +140,12 @@ function returnXetY(P1X, P1Y, P2X, P2Y) {
     var x = (P2X - P1X) * n + P1X;
     var y = coeff * (x - P1X) + P1Y;
     return [x, y];
+}
+function calculLongueurIntervalle(P1X, P1Y, P2X, P2Y) {
+    var longueur = sqrt((P2X - P1X) * (P2X - P1X) + (P2Y - P1Y) * (P2Y - P1Y));
+    var minXIntervalle = P1X - (longueur / 2);
+    var maxXIntervalle = P2X + (longueur / 2);
+    return [minXIntervalle, maxXIntervalle, longueur];
 }
 function setup() {
     p6_CreateCanvas();

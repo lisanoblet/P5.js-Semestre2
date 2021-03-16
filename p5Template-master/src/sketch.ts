@@ -5,7 +5,7 @@
 const gui = new dat.GUI()
 const params = {
     Seed: 17,
-    Nombre_de_triangles: 15,
+    Nombre_de_triangles: 20,
     //Couleur_Rouge: 0,
     //Couleur_Verte: 0,
     //Couleur_Bleue: 0,
@@ -74,7 +74,6 @@ function draw() {
     let P12X = 332;
     let P12Y = 195;
 
-
     let P13X = 362;
     let P13Y = 195;
 
@@ -110,17 +109,19 @@ function draw() {
 
     let P24X = 876;
     let P24Y = 385;
-    
+
     let P25X = 1000;
     let P25Y = 385;
-/*
-    let P13X = 1100;
-    let P13Y = 420;
+    /*
+        let P13X = 1100;
+        let P13Y = 420;
 
-    let P14X = 400;
-    let P14Y = 250;
-*/
+        let P14X = 400;
+        let P14Y = 250;
+    */
     // Création des lignes du haut
+
+
     strokeWeight(1.25);
     line(P1X, P1Y, P2X, P2Y);
     line(P2X, P2Y, P3X, P3Y);
@@ -146,320 +147,127 @@ function draw() {
     line(P21X, P21Y, P22X, P22Y);
     line(P22X, P22Y, P23X, P23Y);
     line(P23X, P23Y, P24X, P24Y);
-    line(P24X, P24Y, P25X, P25Y);    
+    line(P24X, P24Y, P25X, P25Y);
 
 
-// Création des triangles pour chaque segment
-/* Les lignes créées au dessus me servent de limites pour définir la montagne
-Les deux points me permettent de trouver l'équation de la droite, ce qui me permet ensuite de trouver des coordonnées aléatoires de x et y à placer afin que les triangles aient toujours au moins un point touchant les droites.
-*/
-// INTERVALLE 1
-strokeWeight(1);
-for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
-    /*let coeff = (P2Y - P1Y) / (P2X - P1X);
-    let n = random();
-    let x = (P2X - P1X)*n + P1X;
-    let y = coeff * (x-P1X)+P1Y; 
+    // Création des triangles pour chaque segment
+    /* Les lignes créées au dessus me servent de limites pour définir la montagne
+    Les deux points me permettent de trouver l'équation de la droite, ce qui me permet ensuite de trouver des coordonnées aléatoires de x et y à placer afin que les triangles aient toujours au moins un point touchant les droites.
     */
-    let XetY = returnXetY(P1X, P1Y, P2X, P2Y);
+    // INTERVALLE 1
+    strokeWeight(1);
 
-    let newX = XetY[0];
-    let newY = XetY[1];
-    
-    triangle(newX, newY, random(-100, 200), random(380, 800), random(-100, 200), random(380, 900));
-    //line(newX, newY, random(-100, 200), random(280, 800));
+    // APPEL DES FONCTIONS DE CREATION DES TRIANGLES
+    //draw_some_triangles(params.Nombre_de_triangles, P1X, P1Y, P2X, P2Y);
 
+    draw_some_triangles(P1X, P1Y, P2X, P2Y);
+
+    draw_some_triangles(P2X, P2Y, P3X, P3Y);
+
+    draw_some_triangles(P3X, P3Y, P4X, P4Y);
+
+    draw_some_triangles(P4X, P4Y, P5X, P5Y);
+
+    draw_some_triangles(P5X, P5Y, P6X, P6Y);
+
+    draw_some_triangles(P6X, P6Y, P7X, P7Y);
+
+    draw_some_triangles(P7X, P7Y, P8X, P8Y);
+
+    draw_some_triangles(P8X, P8Y, P9X, P9Y);
+
+    draw_some_triangles(P9X, P9Y, P10X, P10Y);
+
+    draw_some_triangles(P10X, P10Y, P11X, P11Y);
+
+    draw_some_triangles(P11X, P11Y, P12X, P12Y);
+
+    draw_some_triangles(P12X, P12Y, P13X, P13Y);
+
+    draw_some_triangles(P13X, P13Y, P14X, P14Y);
+
+    draw_some_triangles(P14X, P14Y, P15X, P15Y);
+
+    draw_some_triangles(P15X, P15Y, P16X, P16Y);
+
+    draw_some_triangles(P16X, P16Y, P17X, P17Y);
+
+    draw_some_triangles(P17X, P17Y, P18X, P18Y);
+
+    draw_some_triangles(P18X, P18Y, P19X, P19Y);
+
+    draw_some_triangles(P19X, P19Y, P20X, P20Y);
+
+    draw_some_triangles(P20X, P20Y, P21X, P21Y);
+
+    draw_some_triangles(P21X, P21Y, P22X, P22Y);
+
+    draw_some_triangles(P22X, P22Y, P23X, P23Y);
+
+    draw_some_triangles(P23X, P23Y, P24X, P24Y);
+
+    draw_some_triangles(P24X, P24Y, P25X, P25Y);
 }
 
-// INTERVALLE 2
-for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
-    let XetY = returnXetY(P2X, P2Y, P3X, P3Y);
 
-    let newX = XetY[0];
-    let newY = XetY[1];
+function draw_some_triangles(x_start, y_start, x_end, y_end) {
 
-    triangle(newX, newY, random(-50, 250), random(400, 900), random(-50, 250), random(400, 750));
-    //line(newX, newY, random(-50, 250), random(400, 800));
-}
+    //les triangles sont contenus dans des intervalles qui sont proportionnelles à chaque segment 
+    //je les calcule grace a la fonction
+    let longueurIntervalle = calculLongueurIntervalle(x_start, y_start, x_end, y_end);
 
-// INTERVALLE 3
-for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
-    let XetY = returnXetY(P3X, P3Y, P4X, P4Y);
+    // coordonnées des points x à ne pas dépasser pour les intervalles des segments
+    let minX = longueurIntervalle[0];
+    let maxX = longueurIntervalle[1];
+    let longueur = longueurIntervalle[2];
 
-    let newX = XetY[0];
-    let newY = XetY[1];
 
-    triangle(newX, newY, random(-50, 250), random(400, 750), random(-50, 250), random(400, 650));
-    //line(newX, newY, random(-50, 250), random(400, 800));
-}
+    // pour éviter une densité très très importante sur les petits segments, je rajoute une condition pour diminuer le nombre de triangles
+    if (longueur > 80) {
 
-// INTERVALLE 4
-for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
-    let XetY = returnXetY(P4X, P4Y, P5X, P5Y);
+        for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
+            let XetY = returnXetY(x_start, y_start, x_end, y_end);
+            //coordonnées de x et y le premier point du triangle sur la droite 
+            let newX = XetY[0];
+            let newY = XetY[1];
 
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(50, 300), random(400, 700), random(50, 300), random(400, 900));
-    //line(newX, newY, random(50, 300), random(400, 800));
-}
-
-// INTERVALLE 5
-for (let i = 0; i <= params.Nombre_de_triangles - 5; i++) { //60
-    let XetY = returnXetY(P5X, P5Y, P6X, P6Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(0, 300), random(300, 700), random(0, 300), random(300, 700));
-    //line(newX, newY, random(0, 300), random(300, 800));
-}
-
-// INTERVALLE 6
-for (let i = 0; i <= params.Nombre_de_triangles - 5; i++) { //60
-    let XetY = returnXetY(P6X, P6Y, P7X, P7Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(-20, 320), random(400, 700), random(-20, 320), random(400, 700));
-    //line(newX, newY, random(-20, 320), random(400, 800));
-}
-
-// INTERVALLE 7
-for (let i = 0; i <= params.Nombre_de_triangles - 5; i++) { //60
-    let XetY = returnXetY(P7X, P7Y, P8X, P8Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(-40, 340), random(400, 800), random(-40, 340), random(400, 800));
-    //line(newX, newY, random(-40, 340), random(400, 800));
-}
-
-// INTERVALLE 8
-for (let i = 0; i <= params.Nombre_de_triangles - 5; i++) { //60
-    let XetY = returnXetY(P8X, P8Y, P9X, P9Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(-50, 350), random(400, 700), random(-50, 350), random(400, 700));
-}
-
-// INTERVALLE 9
-for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
-    let XetY = returnXetY(P9X, P9Y, P10X, P10Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(0, 400), random(400, 800), random(0, 400), random(400, 800));
-}
-
-// INTERVALLE 10
-for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
-    let XetY = returnXetY(P10X, P10Y, P11X, P11Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(0, 400), random(450, 800), random(0, 400), random(450, 800));
-}
-
-// INTERVALLE 11
-for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
-    let XetY = returnXetY(P11X, P11Y, P12X, P12Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(0, 400), random(450, 800), random(0, 400), random(450, 800));
-    //line(newX, newY, random(0, 400), random(450, 800));
-}
-
-// INTERVALLE 12
-for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
-    let XetY = returnXetY(P12X, P12Y, P13X, P13Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(130, 530), random(450, 700), random(130, 530), random(450, 800));
-    //line(newX, newY, random(130, 530), random(450, 800));
-}
-
-// INTERVALLE 13
-for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
-    let XetY = returnXetY(P13X, P13Y, P14X, P14Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(160, 560), random(450, 650), random(160, 560), random(450, 500));
-}
-
-// INTERVALLE 14
-for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
-    let XetY = returnXetY(P14X, P14Y, P15X, P15Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(200, 600), random(450, 500), random(200, 600), random(400, 450));
-}
-
-// INTERVALLE 15
-for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
-    let XetY = returnXetY(P15X, P15Y, P16X, P16Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(260, 660), random(450, 400), random(260, 660), random(450, 500));
-}
-
-// INTERVALLE 16 oupsi
-for (let i = 0; i <= params.Nombre_de_triangles + 10; i++) { //60
-    let XetY = returnXetY(P16X, P16Y, P17X, P17Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(300, 600), random(450, 500), random(300, 600), random(450, 300));
-}
-
-// INTERVALLE 16
-for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
-    let XetY = returnXetY(P17X, P17Y, P18X, P18Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(350, 550), random(450, 600), random(350, 550), random(450, 600));
-    //line(newX, newY, newX + random(0, 100), random(450, 800));
-}
-
-// INTERVALLE 17
-for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
-    let XetY = returnXetY(P18X, P18Y, P19X, P19Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(360, 560), random(450, 600), random(360, 560), random(450, 600));
-}
-
-// INTERVALLE 18
-for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
-    let XetY = returnXetY(P19X, P19Y, P20X, P20Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(400, 600), random(450, 700), random(500, 700), random(450, 700));
-}
-
-// INTERVALLE 19
-for (let i = 0; i <= params.Nombre_de_triangles + 10; i++) { //60
-    let XetY = returnXetY(P20X, P20Y, P21X, P21Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(430, 730), random(450, 800), random(530, 830), random(450, 800));
-}
-
-// INTERVALLE 20
-for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
-    let XetY = returnXetY(P21X, P21Y, P22X, P22Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(600, 900), random(450, 750), random(600, 900), random(450, 800));
-}
-
-// INTERVALLE 21
-for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
-    let XetY = returnXetY(P22X, P22Y, P23X, P23Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(630, 930), random(650, 800), random(630, 930), random(650, 700));
-}
-
-// INTERVALLE 22
-for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
-    let XetY = returnXetY(P23X, P23Y, P24X, P24Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(660, 1000), random(450, 750), random(660, 1000), random(450, 850));
-}
-
-// INTERVALLE 23
-for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
-    let XetY = returnXetY(P24X, P24Y, P25X, P25Y);
-
-    let newX = XetY[0];
-    let newY = XetY[1];
-
-    triangle(newX, newY, random(670, 1000), random(450, 700), random(670, 1000), random(450, 750));
-}
-
-   
-    
-   
-    /*for(let point = 1; point <= 24; point++){
-        //for(let pointSup = 2; pointSup <= 25; pointSup++){
-
-        //line(point1X, point1Y, point2X, point2Y);
-        let pointTest = 'P' + point + 'X';
-        //console.log("test des points : " + pointTest);
-        //console.log("test des points : " + 'P' + point + 'X');
-        let XetY = returnXetY('P' + point + 'X', 'P' + point + 'Y', 'P' + (point + 1) + 'X', 'P' + (point + 1) + 'Y');
+            // je change les valeurs des y pour avoir des hauteurs différentes comme sur l'oeuvre originale mais proportionnelles de ce qu'il y a au dessus sans dépasser la ligne 
+            triangle(newX, newY, random(minX, maxX), random(y_start + 120, y_start + 500), random(minX, maxX), random(y_start + 120, y_start + 500));
+        }
+    } else {
+        for (let i = 0; i <= params.Nombre_de_triangles / 4; i++) { //60
+            let XetY = returnXetY(x_start, y_start, x_end, y_end);
 
             let newX = XetY[0];
             let newY = XetY[1];
 
-            for (let i = 0; i <= params.Nombre_de_triangles; i++) { 
-                triangle(newX, newY, random(0, 1000), random(450, 700), random(0, 1000), random(400, 800));
+            triangle(newX, newY, random(minX, maxX), random(y_start + 120, y_start + 500), random(minX, maxX), random(y_start + 120, y_start + 500));
         }
-    }*/
-    
+    }
 }
 
 
-
-/*
-function coefficient(P1X, P1Y, P2X, P2Y) {
+// retourne les coordonnées du premier point du triangle qui est sur la droite 
+function returnXetY(P1X, P1Y, P2X, P2Y) {
     let coeff = (P2Y - P1Y) / (P2X - P1X);
-    return coeff;
-}
-
-function xDroite(P1X, P1Y, P2X, P2Y) {
     let n = random();
     let x = (P2X - P1X) * n + P1X;
-    return x;
-}
-
-function yDroite(P1X, P1Y, P2X, P2Y) {
-    let y = coefficient(P1X, P1Y, P2X, P2Y) * (xDroite(P1X, P1Y, P2X, P2Y) - P2X) + P2Y;
-    return y;
-}
-*/
-
-
-function returnXetY(P1X, P1Y, P2X, P2Y){
-    let coeff = (P2Y - P1Y) / (P2X - P1X);
-    let n = random();
-    let x = (P2X - P1X)*n + P1X;
-    let y = coeff * (x-P1X)+P1Y;
+    let y = coeff * (x - P1X) + P1Y;
+    //let longueur = sqrt((P2X - P1X)*(P2X - P1X) + (P2Y - P1Y)*(P2Y - P1Y));
+    //let longueurIntervalle = longueur * longueur;
 
     return [x, y];
+}
+
+//permet de calculer les intervalles pour chaque segment pour que ce soit proportionnel à sa longueur
+function calculLongueurIntervalle(P1X, P1Y, P2X, P2Y) {
+    let longueur = sqrt((P2X - P1X) * (P2X - P1X) + (P2Y - P1Y) * (P2Y - P1Y));
+    //let longueurIntervalle = longueur * 4;
+
+    let minXIntervalle = P1X - (longueur / 2);
+    let maxXIntervalle = P2X + (longueur / 2);
+
+    return [minXIntervalle, maxXIntervalle, longueur];
 }
 
 // -------------------
@@ -473,5 +281,3 @@ function setup() {
 function windowResized() {
     p6_ResizeCanvas()
 }
-
-
