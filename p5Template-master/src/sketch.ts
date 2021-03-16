@@ -413,7 +413,7 @@ for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
    
     
    
-    for(let point = 1; point <= 24; point++){
+    /*for(let point = 1; point <= 24; point++){
         //for(let pointSup = 2; pointSup <= 25; pointSup++){
 
         //line(point1X, point1Y, point2X, point2Y);
@@ -428,7 +428,7 @@ for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
             for (let i = 0; i <= params.Nombre_de_triangles; i++) { 
                 triangle(newX, newY, random(0, 1000), random(450, 700), random(0, 1000), random(400, 800));
         }
-    }
+    }*/
     
 }
 

@@ -231,15 +231,6 @@ function draw() {
         var newY = XetY[1];
         triangle(newX, newY, random(670, 1000), random(450, 700), random(670, 1000), random(450, 750));
     }
-    for (var point_1 = 1; point_1 <= 24; point_1++) {
-        var pointTest = 'P' + point_1 + 'X';
-        var XetY = returnXetY('P' + point_1 + 'X', 'P' + point_1 + 'Y', 'P' + (point_1 + 1) + 'X', 'P' + (point_1 + 1) + 'Y');
-        var newX = XetY[0];
-        var newY = XetY[1];
-        for (var i = 0; i <= params.Nombre_de_triangles; i++) {
-            triangle(newX, newY, random(0, 1000), random(450, 700), random(0, 1000), random(400, 800));
-        }
-    }
 }
 function returnXetY(P1X, P1Y, P2X, P2Y) {
     var coeff = (P2Y - P1Y) / (P2X - P1X);
