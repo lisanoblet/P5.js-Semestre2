@@ -5,7 +5,7 @@
 const gui = new dat.GUI()
 const params = {
     Seed: 17,
-    Nombre_de_triangles: 20,
+    Nombre_de_triangles: 50,
     //Couleur_Rouge: 0,
     //Couleur_Verte: 0,
     //Couleur_Bleue: 0,
@@ -28,7 +28,9 @@ gui.add(params, "Download_Image")
 
 function draw() {
 
-    background('#fff1fb');
+    scale(width/1000, width/1000);
+    
+    background('white');
 
     //randomSeed(6)
     randomSeed(params.Seed)
@@ -36,6 +38,12 @@ function draw() {
 
     noFill();
 
+    let montagne_machin
+    let montagne_truc
+    function preload() {
+      montagne_machin = loadJSON("montagnes/montagne_machin.json")
+      montagne_truc = loadJSON("montagnes/montagne_truc.json")
+    }
 
     // Points pour les lignes du haut
     let P1X = 0;

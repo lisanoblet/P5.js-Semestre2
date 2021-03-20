@@ -1,16 +1,23 @@
 var gui = new dat.GUI();
 var params = {
     Seed: 17,
-    Nombre_de_triangles: 20,
+    Nombre_de_triangles: 50,
     Download_Image: function () { return save(); },
 };
 gui.add(params, "Seed", 0, 100, 1);
 gui.add(params, "Nombre_de_triangles", 0, 200, 1);
 gui.add(params, "Download_Image");
 function draw() {
-    background('#fff1fb');
+    scale(width / 1000, width / 1000);
+    background('white');
     randomSeed(params.Seed);
     noFill();
+    var montagne_machin;
+    var montagne_truc;
+    function preload() {
+        montagne_machin = loadJSON("montagnes/montagne_machin.json");
+        montagne_truc = loadJSON("montagnes/montagne_truc.json");
+    }
     var P1X = 0;
     var P1Y = 280;
     var P2X = 47;
