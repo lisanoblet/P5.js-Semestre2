@@ -1,3 +1,6 @@
+# LINK TO SEE MY WORK
+https://lisanoblet.github.io/P5.js-Semestre2/p5Template-master/index.html
+
 # Pseudocode
 
 First, you trace a line to outline the mountain which defines the landscape. You can add more points to the line so that the outline/motif of the mountain is more precise. 

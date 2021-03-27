@@ -1,3 +1,10 @@
+var tableauMontagnes = ['Aiguille_du_Midi', 'Amphitheatre_Drakensberg', 'Annapurna', 'Aoraki_Mount_Cook', 'Barre_des_Ecrins',
+    'Ben_Nevis', 'Denali', 'Dufourspitze', 'El_Capitan', 'Galdhopiggen', 'Gerlachovsky_stit', 'Gunnbjorn_Fjeld', 'K2',
+    'Khan_Tengri', 'Kirkjufell', 'Le_Vignemal', 'Licancabur', 'Manaslu', 'Matterhorn', 'Mont_Blanc', 'Montagne_Sainte_Victoire',
+    'Mount_Ararat', 'Mount_Elbrus', 'Mount_Everest', 'Mount_Fuji', 'Mount_Hua', 'Mount_Kailash', 'Mount_Kilimanjaro',
+    'Mount_Kinabalu', 'Mount_Olympus', 'Mount_Rainier', 'Mount_Rushmore', 'Mount_Scenery', 'Mountains_of_Banff', 'Popocatepetl',
+    'Shkara', 'Table_Mountain', 'Tre_Cime_Di_Lavaredo', 'Triglav', 'Ushba', 'Vorder_Grauspitz', 'Zla_Kolata', 'Zugspitze'
+];
 var montagne;
 var gui = new dat.GUI();
 var params = {
@@ -5,78 +12,38 @@ var params = {
     Nombre_de_triangles: 50,
     Longueur_des_Triangles: 500,
     Couleur: '#000000',
-    Montagnes: "K2",
+    Montagnes: "Montagne_Sainte_Victoire",
     Download_Image: function () { return save(); },
 };
+gui.add(params, 'Montagnes', tableauMontagnes).onChange(function (val) { return montagne = loadJSON("montagnes/" + val + ".json"); });
 gui.add(params, "Seed", 0, 100, 1);
 gui.add(params, "Nombre_de_triangles", 0, 200, 1);
 gui.add(params, "Longueur_des_Triangles", 400, 1000, 1);
-gui.add(params, 'Montagnes', ['K2', 'Aiguille_du_Midi', 'Amphitheatre_Drakensberg', 'Annapurna', 'Aoraki_Mount_Cook']).onChange(function (val) { return montagne = loadJSON("montagnes/" + val + ".json"); });
 gui.addColor(params, "Couleur");
 gui.add(params, "Download_Image");
-var Aiguille_du_Midi;
-var Amphitheatre_Drakensberg;
-var Annapurna;
-var Aoraki_Mount_Cook;
-var Barre_des_Ecrins;
-var Ben_Nevis;
-var Denali;
-var Dufourspitze;
-var El_Capitan;
-var Galdhopiggen;
-var Gerlachovsky_stit;
-var Gunnbjorn_Fjeld;
-var K2;
-var Khan_Tengri;
-var Kirkjufell;
-var Le_Vignemal;
-var Licancabur;
-var Manaslu;
-var Matterhorn;
-var Mont_Blanc;
-var Montagne_Sainte_Victoire;
-var Mount_Ararat;
-var Mount_Elbrus;
-var Mount_Everest;
-var Mount_Fuji;
-var Mount_Hua;
-var Mount_Kailash;
-var Mount_Kilimanjaro;
-var Mount_Kinabalu;
-var Mount_Olympus;
-var Mount_Rainier;
-var Mount_Rushmore;
-var Mount_Scenery;
-var Mountains_of_Banff;
-var Popocatepetl;
-var Shkara;
-var Table_Mountain;
-var Tre_Cime_Di_Lavaredo;
-var Triglav;
-var Ushba;
-var Vorder_Grauspitz;
-var Zla_Kolata;
-var Zugspitze;
 function preload() {
     montagne = loadJSON("montagnes/" + params.Montagnes + ".json");
 }
 function draw() {
-    scale(width / 1000, width / 1000);
-    background('white');
-    randomSeed(params.Seed);
-    noFill();
-    var PX = montagne.PX;
-    var PY = montagne.PY;
-    stroke(params.Couleur);
-    for (var i = 0; i < PX.length - 1; ++i) {
-        line(PX[i], PY[i], PX[i + 1], PY[i + 1]);
+    if (montagne.PX && montagne.PY) {
+        scale(width / 1000, width / 1000);
+        background('white');
+        randomSeed(params.Seed);
+        stroke(params.Couleur);
+        noFill();
+        var PX = montagne.PX;
+        var PY = montagne.PY;
+        for (var i = 0; i < PX.length - 1; ++i) {
+            line(PX[i], PY[i], PX[i + 1], PY[i + 1]);
+        }
+        for (var i = 0; i < PX.length - 1; ++i) {
+            draw_some_triangles(PX[i], PY[i], PX[i + 1], PY[i + 1]);
+        }
+        fill(0, 102, 153);
+        strokeWeight(0.5);
+        text(params.Montagnes, width / 2, 980);
+        strokeWeight(1);
     }
-    for (var i = 0; i < PX.length - 1; ++i) {
-        draw_some_triangles(PX[i], PY[i], PX[i + 1], PY[i + 1]);
-    }
-    fill(0, 102, 153);
-    text(montagne, width / 2 + 200, 890);
-    strokeWeight(1);
 }
 function draw_some_triangles(x_start, y_start, x_end, y_end) {
     var longueurIntervalle = calculLongueurIntervalle(x_start, y_start, x_end, y_end);
