@@ -2,18 +2,42 @@
 //  Parameters and UI
 // -------------------
 
+//let tableauMontagnes = ['K2', 'Sainte_Victoire', 'Mont_Blanc'];
+//let montagneChoisie;
+let montagne;
+
 const gui = new dat.GUI()
 const params = {
     Seed: 17,
     Nombre_de_triangles: 50,
+    Longueur_des_Triangles: 500,
+    //Largeur_des_Triangles: 120,
+    Couleur: '#000000',
+    //tableauMontagnes: 'K2',
+    //message: "bonjour",
+    //test: false,
+    Montagnes: "K2",
     //Couleur_Rouge: 0,
     //Couleur_Verte: 0,
     //Couleur_Bleue: 0,
     //Nuance_Gris: 0,
     Download_Image: () => save(),
+    //Montagne: () => montagneChoisie(),
 }
+
 gui.add(params, "Seed", 0, 100, 1)
 gui.add(params, "Nombre_de_triangles", 0, 200, 1)
+
+gui.add(params, "Longueur_des_Triangles", 400, 1000, 1)
+
+//val => montagne = loadJSON("montagnes/" + val + ".json")
+
+//gui.add(params, "Largeur_des_Triangles", 120, 1000, 1)
+//gui.add(params, "message")
+gui.add(params, 'Montagnes', [ 'K2', 'Aiguille_du_Midi', 'Amphitheatre_Drakensberg', 'Annapurna', 'Aoraki_Mount_Cook', 'Barre_des_Ecrins', 'Ben_Nevis', 'Denali'] ).onChange(val => montagne = loadJSON("montagnes/" + val + ".json"));
+//gui.add(text, 'language', ['english','spanish','french'])
+gui.addColor(params, "Couleur")
+//gui.add(params, "Name", tableauMontagnes[0], tableauMontagnes[1], 1)
 //gui.add(params, "Nuance_Gris", 0, 255, 1)
 //gui.add(params, "Couleur_Rouge", 0, 255, 1)
 
@@ -21,10 +45,85 @@ gui.add(params, "Nombre_de_triangles", 0, 200, 1)
 
 //gui.add(params, "Couleur_Bleue", 0, 255, 1)
 gui.add(params, "Download_Image")
+//gui.add(params, "Montagne")
 
 // -------------------
 //       Drawing
 // -------------------
+
+//montagne = params.Montagnes;
+
+let Aiguille_du_Midi;
+let Amphitheatre_Drakensberg;
+let Annapurna;
+let Aoraki_Mount_Cook;
+let Barre_des_Ecrins;
+let Ben_Nevis;
+let Denali;
+let Dufourspitze;
+let El_Capitan;
+let Galdhopiggen;
+let Gerlachovsky_stit;
+let Gunnbjorn_Fjeld;
+let K2;
+let Khan_Tengri;
+let Kirkjufell;
+let Le_Vignemal;
+let Licancabur;
+let Manaslu;
+let Matterhorn;
+let Mont_Blanc;
+let Montagne_Sainte_Victoire;
+let Mount_Ararat;
+let Mount_Elbrus;
+let Mount_Everest;
+let Mount_Fuji;
+let Mount_Hua;
+let Mount_Kailash;
+let Mount_Kilimanjaro;
+let Mount_Kinabalu;
+let Mount_Olympus;
+let Mount_Rainier;
+let Mount_Rushmore;
+let Mount_Scenery;
+let Mountains_of_Banff;
+let Popocatepetl;
+let Shkara;
+let Table_Mountain;
+let Tre_Cime_Di_Lavaredo;
+let Triglav;
+let Ushba;
+let Vorder_Grauspitz;
+let Zla_Kolata;
+let Zugspitze;
+
+
+
+
+
+
+//montagneChoisie = K2;
+function preload() {
+    
+    /*Aiguille_du_Midi = loadJSON("montagnes/Aiguille_du_Midi.json");
+    Amphitheatre_Drakensberg = loadJSON("montagnes/Amphitheatre_Drakensberg.json");
+    Annapurna = loadJSON("montagnes/Annapurna.json");
+    Aoraki_Mount_Cook = loadJSON("montagnes/Aoraki_Mount_Cook.json");
+
+    K2 = loadJSON("montagnes/K2.json");*/
+
+    montagne = loadJSON("montagnes/" + params.Montagnes + ".json")
+    //redraw();
+    //console.log(montagne)
+    
+}
+/*
+function loadMontagne(nomDuFichier){
+    montagne = nomDuFichier;
+    montagne = loadJSON("montagnes/" + nomDuFichier + ".json");
+    return montagne;
+}
+*/
 
 function draw() {
 
@@ -37,184 +136,33 @@ function draw() {
     //line(debutx, debuty, random(height), random(width));
 
     noFill();
+/*
+    for(let j = params.tableauMontagnes; j<40; j++){
+        let montagneChoisie = tableauMontagnes[j];
+        let montagne = loadJSON("montagnes/" + montagneChoisie + ".json")
+    }
+    */
+    
+//console.log(montagne.PX)
+    const PX = montagne.PX;
+    const PY = montagne.PY;
+    //console.log(PX)
+    stroke(params.Couleur);
 
-    let montagne_machin
-    let montagne_truc
-    function preload() {
-      montagne_machin = loadJSON("montagnes/montagne_machin.json")
-      montagne_truc = loadJSON("montagnes/montagne_truc.json")
+    for (let i = 0; i < PX.length - 1; ++i) {
+      line(PX[i], PY[i], PX[i+1], PY[i+1]);
     }
 
-    // Points pour les lignes du haut
-    let P1X = 0;
-    let P1Y = 280;
+    
+    for (let i = 0; i < PX.length - 1; ++i) {
+      draw_some_triangles(PX[i], PY[i], PX[i+1], PY[i+1]);
+    }
 
-    let P2X = 47;
-    let P2Y = 270;
+    fill(0, 102, 153);
+    text(montagne, width/2+200, 890);
 
-    let P3X = 63;
-    let P3Y = 280;
-
-    let P4X = 94;
-    let P4Y = 252;
-
-    let P5X = 105;
-    let P5Y = 252;
-
-    let P6X = 120;
-    let P6Y = 242;
-
-    let P7X = 136;
-    let P7Y = 242;
-
-    let P8X = 158;
-    let P8Y = 226;
-
-    let P9X = 187;
-    let P9Y = 242;
-
-    let P10X = 198;
-    let P10Y = 233;
-
-    let P11X = 211;
-    let P11Y = 235;
-
-    let P12X = 332;
-    let P12Y = 195;
-
-    let P13X = 362;
-    let P13Y = 195;
-
-    let P14X = 403;
-    let P14Y = 177;
-
-    let P15X = 468;
-    let P15Y = 172;
-
-    let P16X = 507;
-    let P16Y = 145;
-
-    let P17X = 546;
-    let P17Y = 154;
-
-    let P18X = 561;
-    let P18Y = 212;
-
-    let P19X = 610;
-    let P19Y = 272;
-
-    let P20X = 632;
-    let P20Y = 320;
-
-    let P21X = 788;
-    let P21Y = 335;
-
-    let P22X = 830;
-    let P22Y = 376;
-
-    let P23X = 866;
-    let P23Y = 376;
-
-    let P24X = 876;
-    let P24Y = 385;
-
-    let P25X = 1000;
-    let P25Y = 385;
-    /*
-        let P13X = 1100;
-        let P13Y = 420;
-
-        let P14X = 400;
-        let P14Y = 250;
-    */
-    // Création des lignes du haut
-
-
-    strokeWeight(1.25);
-    line(P1X, P1Y, P2X, P2Y);
-    line(P2X, P2Y, P3X, P3Y);
-    line(P3X, P3Y, P4X, P4Y);
-    line(P4X, P4Y, P5X, P5Y);
-    line(P5X, P5Y, P6X, P6Y);
-    line(P6X, P6Y, P7X, P7Y);
-    line(P7X, P7Y, P8X, P8Y);
-    line(P8X, P8Y, P9X, P9Y);
-    line(P9X, P9Y, P10X, P10Y);
-    line(P10X, P10Y, P11X, P11Y);
-    line(P11X, P11Y, P12X, P12Y);
-
-    line(P12X, P12Y, P13X, P13Y);
-    line(P13X, P13Y, P14X, P14Y);
-    line(P14X, P14Y, P15X, P15Y);
-    line(P15X, P15Y, P16X, P16Y);
-    line(P16X, P16Y, P17X, P17Y);
-    line(P17X, P17Y, P18X, P18Y);
-    line(P18X, P18Y, P19X, P19Y);
-    line(P19X, P19Y, P20X, P20Y);
-    line(P20X, P20Y, P21X, P21Y);
-    line(P21X, P21Y, P22X, P22Y);
-    line(P22X, P22Y, P23X, P23Y);
-    line(P23X, P23Y, P24X, P24Y);
-    line(P24X, P24Y, P25X, P25Y);
-
-
-    // Création des triangles pour chaque segment
-    /* Les lignes créées au dessus me servent de limites pour définir la montagne
-    Les deux points me permettent de trouver l'équation de la droite, ce qui me permet ensuite de trouver des coordonnées aléatoires de x et y à placer afin que les triangles aient toujours au moins un point touchant les droites.
-    */
-    // INTERVALLE 1
     strokeWeight(1);
 
-    // APPEL DES FONCTIONS DE CREATION DES TRIANGLES
-    //draw_some_triangles(params.Nombre_de_triangles, P1X, P1Y, P2X, P2Y);
-
-    draw_some_triangles(P1X, P1Y, P2X, P2Y);
-
-    draw_some_triangles(P2X, P2Y, P3X, P3Y);
-
-    draw_some_triangles(P3X, P3Y, P4X, P4Y);
-
-    draw_some_triangles(P4X, P4Y, P5X, P5Y);
-
-    draw_some_triangles(P5X, P5Y, P6X, P6Y);
-
-    draw_some_triangles(P6X, P6Y, P7X, P7Y);
-
-    draw_some_triangles(P7X, P7Y, P8X, P8Y);
-
-    draw_some_triangles(P8X, P8Y, P9X, P9Y);
-
-    draw_some_triangles(P9X, P9Y, P10X, P10Y);
-
-    draw_some_triangles(P10X, P10Y, P11X, P11Y);
-
-    draw_some_triangles(P11X, P11Y, P12X, P12Y);
-
-    draw_some_triangles(P12X, P12Y, P13X, P13Y);
-
-    draw_some_triangles(P13X, P13Y, P14X, P14Y);
-
-    draw_some_triangles(P14X, P14Y, P15X, P15Y);
-
-    draw_some_triangles(P15X, P15Y, P16X, P16Y);
-
-    draw_some_triangles(P16X, P16Y, P17X, P17Y);
-
-    draw_some_triangles(P17X, P17Y, P18X, P18Y);
-
-    draw_some_triangles(P18X, P18Y, P19X, P19Y);
-
-    draw_some_triangles(P19X, P19Y, P20X, P20Y);
-
-    draw_some_triangles(P20X, P20Y, P21X, P21Y);
-
-    draw_some_triangles(P21X, P21Y, P22X, P22Y);
-
-    draw_some_triangles(P22X, P22Y, P23X, P23Y);
-
-    draw_some_triangles(P23X, P23Y, P24X, P24Y);
-
-    draw_some_triangles(P24X, P24Y, P25X, P25Y);
 }
 
 
@@ -240,7 +188,7 @@ function draw_some_triangles(x_start, y_start, x_end, y_end) {
             let newY = XetY[1];
 
             // je change les valeurs des y pour avoir des hauteurs différentes comme sur l'oeuvre originale mais proportionnelles de ce qu'il y a au dessus sans dépasser la ligne 
-            triangle(newX, newY, random(minX, maxX), random(y_start + 120, y_start + 500), random(minX, maxX), random(y_start + 120, y_start + 500));
+            triangle(newX, newY, random(minX, maxX), random(y_start + 120, y_start + params.Longueur_des_Triangles), random(minX, maxX), random(y_start + 120, y_start + params.Longueur_des_Triangles));
         }
     } else {
         for (let i = 0; i <= params.Nombre_de_triangles / 4; i++) { //60
@@ -249,7 +197,7 @@ function draw_some_triangles(x_start, y_start, x_end, y_end) {
             let newX = XetY[0];
             let newY = XetY[1];
 
-            triangle(newX, newY, random(minX, maxX), random(y_start + 120, y_start + 500), random(minX, maxX), random(y_start + 120, y_start + 500));
+            triangle(newX, newY, random(minX, maxX), random(y_start + 120, y_start + params.Longueur_des_Triangles), random(minX, maxX), random(y_start + 120, y_start + params.Longueur_des_Triangles));
         }
     }
 }
@@ -282,8 +230,13 @@ function calculLongueurIntervalle(P1X, P1Y, P2X, P2Y) {
 //    Initialization
 // -------------------
 
+
 function setup() {
+    //noLoop()
+
     p6_CreateCanvas()
+
+ 
 }
 
 function windowResized() {

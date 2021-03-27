@@ -1,123 +1,82 @@
+var montagne;
 var gui = new dat.GUI();
 var params = {
     Seed: 17,
     Nombre_de_triangles: 50,
+    Longueur_des_Triangles: 500,
+    Couleur: '#000000',
+    Montagnes: "K2",
     Download_Image: function () { return save(); },
 };
 gui.add(params, "Seed", 0, 100, 1);
 gui.add(params, "Nombre_de_triangles", 0, 200, 1);
+gui.add(params, "Longueur_des_Triangles", 400, 1000, 1);
+gui.add(params, 'Montagnes', ['K2', 'Aiguille_du_Midi', 'Amphitheatre_Drakensberg', 'Annapurna', 'Aoraki_Mount_Cook']).onChange(function (val) { return montagne = loadJSON("montagnes/" + val + ".json"); });
+gui.addColor(params, "Couleur");
 gui.add(params, "Download_Image");
+var Aiguille_du_Midi;
+var Amphitheatre_Drakensberg;
+var Annapurna;
+var Aoraki_Mount_Cook;
+var Barre_des_Ecrins;
+var Ben_Nevis;
+var Denali;
+var Dufourspitze;
+var El_Capitan;
+var Galdhopiggen;
+var Gerlachovsky_stit;
+var Gunnbjorn_Fjeld;
+var K2;
+var Khan_Tengri;
+var Kirkjufell;
+var Le_Vignemal;
+var Licancabur;
+var Manaslu;
+var Matterhorn;
+var Mont_Blanc;
+var Montagne_Sainte_Victoire;
+var Mount_Ararat;
+var Mount_Elbrus;
+var Mount_Everest;
+var Mount_Fuji;
+var Mount_Hua;
+var Mount_Kailash;
+var Mount_Kilimanjaro;
+var Mount_Kinabalu;
+var Mount_Olympus;
+var Mount_Rainier;
+var Mount_Rushmore;
+var Mount_Scenery;
+var Mountains_of_Banff;
+var Popocatepetl;
+var Shkara;
+var Table_Mountain;
+var Tre_Cime_Di_Lavaredo;
+var Triglav;
+var Ushba;
+var Vorder_Grauspitz;
+var Zla_Kolata;
+var Zugspitze;
+function preload() {
+    montagne = loadJSON("montagnes/" + params.Montagnes + ".json");
+}
 function draw() {
     scale(width / 1000, width / 1000);
     background('white');
     randomSeed(params.Seed);
     noFill();
-    var montagne_machin;
-    var montagne_truc;
-    function preload() {
-        montagne_machin = loadJSON("montagnes/montagne_machin.json");
-        montagne_truc = loadJSON("montagnes/montagne_truc.json");
+    var PX = montagne.PX;
+    var PY = montagne.PY;
+    stroke(params.Couleur);
+    for (var i = 0; i < PX.length - 1; ++i) {
+        line(PX[i], PY[i], PX[i + 1], PY[i + 1]);
     }
-    var P1X = 0;
-    var P1Y = 280;
-    var P2X = 47;
-    var P2Y = 270;
-    var P3X = 63;
-    var P3Y = 280;
-    var P4X = 94;
-    var P4Y = 252;
-    var P5X = 105;
-    var P5Y = 252;
-    var P6X = 120;
-    var P6Y = 242;
-    var P7X = 136;
-    var P7Y = 242;
-    var P8X = 158;
-    var P8Y = 226;
-    var P9X = 187;
-    var P9Y = 242;
-    var P10X = 198;
-    var P10Y = 233;
-    var P11X = 211;
-    var P11Y = 235;
-    var P12X = 332;
-    var P12Y = 195;
-    var P13X = 362;
-    var P13Y = 195;
-    var P14X = 403;
-    var P14Y = 177;
-    var P15X = 468;
-    var P15Y = 172;
-    var P16X = 507;
-    var P16Y = 145;
-    var P17X = 546;
-    var P17Y = 154;
-    var P18X = 561;
-    var P18Y = 212;
-    var P19X = 610;
-    var P19Y = 272;
-    var P20X = 632;
-    var P20Y = 320;
-    var P21X = 788;
-    var P21Y = 335;
-    var P22X = 830;
-    var P22Y = 376;
-    var P23X = 866;
-    var P23Y = 376;
-    var P24X = 876;
-    var P24Y = 385;
-    var P25X = 1000;
-    var P25Y = 385;
-    strokeWeight(1.25);
-    line(P1X, P1Y, P2X, P2Y);
-    line(P2X, P2Y, P3X, P3Y);
-    line(P3X, P3Y, P4X, P4Y);
-    line(P4X, P4Y, P5X, P5Y);
-    line(P5X, P5Y, P6X, P6Y);
-    line(P6X, P6Y, P7X, P7Y);
-    line(P7X, P7Y, P8X, P8Y);
-    line(P8X, P8Y, P9X, P9Y);
-    line(P9X, P9Y, P10X, P10Y);
-    line(P10X, P10Y, P11X, P11Y);
-    line(P11X, P11Y, P12X, P12Y);
-    line(P12X, P12Y, P13X, P13Y);
-    line(P13X, P13Y, P14X, P14Y);
-    line(P14X, P14Y, P15X, P15Y);
-    line(P15X, P15Y, P16X, P16Y);
-    line(P16X, P16Y, P17X, P17Y);
-    line(P17X, P17Y, P18X, P18Y);
-    line(P18X, P18Y, P19X, P19Y);
-    line(P19X, P19Y, P20X, P20Y);
-    line(P20X, P20Y, P21X, P21Y);
-    line(P21X, P21Y, P22X, P22Y);
-    line(P22X, P22Y, P23X, P23Y);
-    line(P23X, P23Y, P24X, P24Y);
-    line(P24X, P24Y, P25X, P25Y);
+    for (var i = 0; i < PX.length - 1; ++i) {
+        draw_some_triangles(PX[i], PY[i], PX[i + 1], PY[i + 1]);
+    }
+    fill(0, 102, 153);
+    text(montagne, width / 2 + 200, 890);
     strokeWeight(1);
-    draw_some_triangles(P1X, P1Y, P2X, P2Y);
-    draw_some_triangles(P2X, P2Y, P3X, P3Y);
-    draw_some_triangles(P3X, P3Y, P4X, P4Y);
-    draw_some_triangles(P4X, P4Y, P5X, P5Y);
-    draw_some_triangles(P5X, P5Y, P6X, P6Y);
-    draw_some_triangles(P6X, P6Y, P7X, P7Y);
-    draw_some_triangles(P7X, P7Y, P8X, P8Y);
-    draw_some_triangles(P8X, P8Y, P9X, P9Y);
-    draw_some_triangles(P9X, P9Y, P10X, P10Y);
-    draw_some_triangles(P10X, P10Y, P11X, P11Y);
-    draw_some_triangles(P11X, P11Y, P12X, P12Y);
-    draw_some_triangles(P12X, P12Y, P13X, P13Y);
-    draw_some_triangles(P13X, P13Y, P14X, P14Y);
-    draw_some_triangles(P14X, P14Y, P15X, P15Y);
-    draw_some_triangles(P15X, P15Y, P16X, P16Y);
-    draw_some_triangles(P16X, P16Y, P17X, P17Y);
-    draw_some_triangles(P17X, P17Y, P18X, P18Y);
-    draw_some_triangles(P18X, P18Y, P19X, P19Y);
-    draw_some_triangles(P19X, P19Y, P20X, P20Y);
-    draw_some_triangles(P20X, P20Y, P21X, P21Y);
-    draw_some_triangles(P21X, P21Y, P22X, P22Y);
-    draw_some_triangles(P22X, P22Y, P23X, P23Y);
-    draw_some_triangles(P23X, P23Y, P24X, P24Y);
-    draw_some_triangles(P24X, P24Y, P25X, P25Y);
 }
 function draw_some_triangles(x_start, y_start, x_end, y_end) {
     var longueurIntervalle = calculLongueurIntervalle(x_start, y_start, x_end, y_end);
@@ -129,7 +88,7 @@ function draw_some_triangles(x_start, y_start, x_end, y_end) {
             var XetY = returnXetY(x_start, y_start, x_end, y_end);
             var newX = XetY[0];
             var newY = XetY[1];
-            triangle(newX, newY, random(minX, maxX), random(y_start + 120, y_start + 500), random(minX, maxX), random(y_start + 120, y_start + 500));
+            triangle(newX, newY, random(minX, maxX), random(y_start + 120, y_start + params.Longueur_des_Triangles), random(minX, maxX), random(y_start + 120, y_start + params.Longueur_des_Triangles));
         }
     }
     else {
@@ -137,7 +96,7 @@ function draw_some_triangles(x_start, y_start, x_end, y_end) {
             var XetY = returnXetY(x_start, y_start, x_end, y_end);
             var newX = XetY[0];
             var newY = XetY[1];
-            triangle(newX, newY, random(minX, maxX), random(y_start + 120, y_start + 500), random(minX, maxX), random(y_start + 120, y_start + 500));
+            triangle(newX, newY, random(minX, maxX), random(y_start + 120, y_start + params.Longueur_des_Triangles), random(minX, maxX), random(y_start + 120, y_start + params.Longueur_des_Triangles));
         }
     }
 }
