@@ -1,0 +1,313 @@
+// -------------------
+//  Parameters and UI
+// -------------------
+
+const gui = new dat.GUI()
+const params = {
+    Seed: 17,
+    Nombre_de_triangles: 50,
+    //Couleur_Rouge: 0,
+    //Couleur_Verte: 0,
+    //Couleur_Bleue: 0,
+    //Nuance_Gris: 0,
+    Download_Image: () => save(),
+}
+gui.add(params, "Seed", 0, 100, 1)
+gui.add(params, "Nombre_de_triangles", 0, 200, 1)
+//gui.add(params, "Nuance_Gris", 0, 255, 1)
+//gui.add(params, "Couleur_Rouge", 0, 255, 1)
+
+//gui.add(params, "Couleur_Verte", 0, 255, 1)
+
+//gui.add(params, "Couleur_Bleue", 0, 255, 1)
+gui.add(params, "Download_Image")
+
+// -------------------
+//       Drawing
+// -------------------
+
+function draw() {
+
+    scale(width/1000, width/1000);
+
+    background('white'); //#fff1fb
+
+    //randomSeed(6)
+    randomSeed(params.Seed)
+    //line(debutx, debuty, random(height), random(width));
+
+    noFill();
+
+
+    // Points pour les lignes du haut
+    let P1X = 0;
+    let P1Y = 523 - 180;
+
+    let P2X = 113;
+    let P2Y = 521 - 180;
+
+    let P3X = 186;
+    let P3Y = 502 - 180;
+
+    let P4X = 220;
+    let P4Y = 487 - 180;
+
+    let P5X = 231;
+    let P5Y = 472 - 180;
+
+    let P6X = 278;
+    let P6Y = 457 - 180;
+
+    let P7X = 288;
+    let P7Y = 442 - 180;
+
+    let P8X = 324;
+    let P8Y = 449 - 180;
+
+    let P9X = 329;
+    let P9Y = 457 - 180;
+
+    let P10X = 342;
+    let P10Y = 458 - 180;
+
+    let P11X = 349;
+    let P11Y = 447 - 180;
+
+    let P12X = 558;
+    let P12Y = 447 - 180;
+
+    let P13X = 565;
+    let P13Y = 456 - 180;
+
+    let P14X = 598;
+    let P14Y = 465 - 180;
+
+    let P15X = 603;
+    let P15Y = 477 - 180;
+
+    let P16X = 618;
+    let P16Y = 477 - 180;
+
+    let P17X = 622;
+    let P17Y = 488 - 180;
+
+    let P18X = 643;
+    let P18Y = 486 - 180;
+
+    let P19X = 680;
+    let P19Y = 492 - 180;
+
+    let P20X = 687;
+    let P20Y = 500 - 180;
+
+    let P21X = 704;
+    let P21Y = 503 - 180;
+
+    let P22X = 735;
+    let P22Y = 488 - 180;
+
+    let P23X = 754;
+    let P23Y = 468 - 180;
+
+    let P24X = 769;
+    let P24Y = 486 - 180;
+
+    let P25X = 835;
+    let P25Y = 513 - 180;
+
+    let P26X = 931;
+    let P26Y = 529 - 180;
+
+    let P27X = 1000;
+    let P27Y = 531 - 180;
+
+
+
+
+
+  
+    /*
+        let P13X = 1100;
+        let P13Y = 420;
+
+        let P14X = 400;
+        let P14Y = 250;
+    */
+    // Création des lignes du haut
+
+
+    strokeWeight(1.25);
+    line(P1X, P1Y, P2X, P2Y);
+    line(P2X, P2Y, P3X, P3Y);
+    line(P3X, P3Y, P4X, P4Y);
+    line(P4X, P4Y, P5X, P5Y);
+    line(P5X, P5Y, P6X, P6Y);
+    line(P6X, P6Y, P7X, P7Y);
+    line(P7X, P7Y, P8X, P8Y);
+    line(P8X, P8Y, P9X, P9Y);
+    line(P9X, P9Y, P10X, P10Y);
+    line(P10X, P10Y, P11X, P11Y);
+    line(P11X, P11Y, P12X, P12Y);
+
+    line(P12X, P12Y, P13X, P13Y);
+    line(P13X, P13Y, P14X, P14Y);
+    line(P14X, P14Y, P15X, P15Y);
+    line(P15X, P15Y, P16X, P16Y);
+    line(P16X, P16Y, P17X, P17Y);
+    line(P17X, P17Y, P18X, P18Y);
+    line(P18X, P18Y, P19X, P19Y);
+    line(P19X, P19Y, P20X, P20Y);
+    line(P20X, P20Y, P21X, P21Y);
+    line(P21X, P21Y, P22X, P22Y);
+    line(P22X, P22Y, P23X, P23Y);
+
+    line(P23X, P23Y, P24X, P24Y);
+    line(P24X, P24Y, P25X, P25Y);
+    line(P25X, P25Y, P26X, P26Y);
+    line(P26X, P26Y, P27X, P27Y);
+
+ 
+
+  
+
+
+    // Création des triangles pour chaque segment
+    /* Les lignes créées au dessus me servent de limites pour définir la montagne
+    Les deux points me permettent de trouver l'équation de la droite, ce qui me permet ensuite de trouver des coordonnées aléatoires de x et y à placer afin que les triangles aient toujours au moins un point touchant les droites.
+    */
+    // INTERVALLE 1
+    strokeWeight(1);
+
+    // APPEL DES FONCTIONS DE CREATION DES TRIANGLES
+    //draw_some_triangles(params.Nombre_de_triangles, P1X, P1Y, P2X, P2Y);
+
+    draw_some_triangles(P1X, P1Y, P2X, P2Y);
+
+    draw_some_triangles(P2X, P2Y, P3X, P3Y);
+
+    draw_some_triangles(P3X, P3Y, P4X, P4Y);
+
+    draw_some_triangles(P4X, P4Y, P5X, P5Y);
+
+    draw_some_triangles(P5X, P5Y, P6X, P6Y);
+
+    draw_some_triangles(P6X, P6Y, P7X, P7Y);
+
+    draw_some_triangles(P7X, P7Y, P8X, P8Y);
+
+    draw_some_triangles(P8X, P8Y, P9X, P9Y);
+
+    draw_some_triangles(P9X, P9Y, P10X, P10Y);
+
+    draw_some_triangles(P10X, P10Y, P11X, P11Y);
+
+    draw_some_triangles(P11X, P11Y, P12X, P12Y);
+
+    draw_some_triangles(P12X, P12Y, P13X, P13Y);
+
+    draw_some_triangles(P13X, P13Y, P14X, P14Y);
+
+    draw_some_triangles(P14X, P14Y, P15X, P15Y);
+
+    draw_some_triangles(P15X, P15Y, P16X, P16Y);
+
+    draw_some_triangles(P16X, P16Y, P17X, P17Y);
+
+    draw_some_triangles(P17X, P17Y, P18X, P18Y);
+
+    draw_some_triangles(P18X, P18Y, P19X, P19Y);
+
+    draw_some_triangles(P19X, P19Y, P20X, P20Y);
+
+    draw_some_triangles(P20X, P20Y, P21X, P21Y);
+
+    draw_some_triangles(P21X, P21Y, P22X, P22Y);
+
+    draw_some_triangles(P22X, P22Y, P23X, P23Y);
+
+    draw_some_triangles(P23X, P23Y, P24X, P24Y);
+
+    draw_some_triangles(P24X, P24Y, P25X, P25Y);
+
+    draw_some_triangles(P25X, P25Y, P26X, P26Y);
+
+    draw_some_triangles(P26X, P26Y, P27X, P27Y);
+
+
+
+
+  
+}
+
+
+function draw_some_triangles(x_start, y_start, x_end, y_end) {
+
+    //les triangles sont contenus dans des intervalles qui sont proportionnelles à chaque segment 
+    //je les calcule grace a la fonction
+    let longueurIntervalle = calculLongueurIntervalle(x_start, y_start, x_end, y_end);
+
+    // coordonnées des points x à ne pas dépasser pour les intervalles des segments
+    let minX = longueurIntervalle[0];
+    let maxX = longueurIntervalle[1];
+    let longueur = longueurIntervalle[2];
+
+
+    // pour éviter une densité très très importante sur les petits segments, je rajoute une condition pour diminuer le nombre de triangles
+    if (longueur > 80) {
+
+        for (let i = 0; i <= params.Nombre_de_triangles; i++) { //60
+            let XetY = returnXetY(x_start, y_start, x_end, y_end);
+            //coordonnées de x et y le premier point du triangle sur la droite 
+            let newX = XetY[0];
+            let newY = XetY[1];
+
+            // je change les valeurs des y pour avoir des hauteurs différentes comme sur l'oeuvre originale mais proportionnelles de ce qu'il y a au dessus sans dépasser la ligne 
+            triangle(newX, newY, random(minX, maxX), random(y_start + 120, y_start + 500), random(minX, maxX), random(y_start + 120, y_start + 500));
+        }
+    } else {
+        for (let i = 0; i <= params.Nombre_de_triangles / 4; i++) { //60
+            let XetY = returnXetY(x_start, y_start, x_end, y_end);
+
+            let newX = XetY[0];
+            let newY = XetY[1];
+
+            triangle(newX, newY, random(minX, maxX), random(y_start + 120, y_start + 500), random(minX, maxX), random(y_start + 120, y_start + 500));
+        }
+    }
+}
+
+
+// retourne les coordonnées du premier point du triangle qui est sur la droite 
+function returnXetY(P1X, P1Y, P2X, P2Y) {
+    let coeff = (P2Y - P1Y) / (P2X - P1X);
+    let n = random();
+    let x = (P2X - P1X) * n + P1X;
+    let y = coeff * (x - P1X) + P1Y;
+    //let longueur = sqrt((P2X - P1X)*(P2X - P1X) + (P2Y - P1Y)*(P2Y - P1Y));
+    //let longueurIntervalle = longueur * longueur;
+
+    return [x, y];
+}
+
+//permet de calculer les intervalles pour chaque segment pour que ce soit proportionnel à sa longueur
+function calculLongueurIntervalle(P1X, P1Y, P2X, P2Y) {
+    let longueur = sqrt((P2X - P1X) * (P2X - P1X) + (P2Y - P1Y) * (P2Y - P1Y));
+    //let longueurIntervalle = longueur * 4;
+
+    let minXIntervalle = P1X - (longueur / 2);
+    let maxXIntervalle = P2X + (longueur / 2);
+
+    return [minXIntervalle, maxXIntervalle, longueur];
+}
+
+// -------------------
+//    Initialization
+// -------------------
+
+function setup() {
+    p6_CreateCanvas()
+}
+
+function windowResized() {
+    p6_ResizeCanvas()
+}
