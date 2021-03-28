@@ -21,12 +21,9 @@ I reiterate the creation of these shapes and the starting lines to have as many 
 
 
 
-
-
-
-
-
-
+#
+#
+#
 
 # p5 template project
 
