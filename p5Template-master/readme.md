@@ -1,4 +1,4 @@
-# LINK TO SEE MY WORK
+# Link to see my work
 https://lisanoblet.github.io/P5.js-Semestre2/p5Template-master/index.html
 
 # Pseudocode
@@ -14,10 +14,15 @@ I reiterate the creation of these shapes and the starting lines to have as many 
 
 
 ## The code therefore simply breaks down into:
-  - Definition of points for the mountain line
+  - Definition of points for the mountain line (outline) following the shape of the mountain
   - Creation of lines/segments that join these points
-  - Calculation of the equation of the line for every segment to obtain the x and y coordinates of one of the first point located on the chosen line
+  - Calculation of the equation of the line for every segment to obtain the x and y coordinates of one point located on the chosen line so that the shapes start from there and always have a point on the line
   - Creation of all the triangles using the calculated coordinates and the other random ones.
+
+
+
+
+
 
 
 
